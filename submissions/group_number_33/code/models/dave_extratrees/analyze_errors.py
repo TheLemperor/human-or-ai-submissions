@@ -54,8 +54,12 @@ def load_validation(run_dir, data_dir):
     for path in source_files:
         if metrics['source_sha256'].get(str(path.relative_to(ROOT))) != sha256(path):
             raise ValueError(f'Run source hash does not match current source: {path.name}')
+    recorded_data = metrics['data_sha256']
+    # The separate validation entrypoint reads only train.csv. The legacy
+    # combined runner records all three files. Verify every recorded digest.
     if (sha256(data_path) != recipe['data_sha256']['train.csv']
-            or metrics['data_sha256'] != recipe['data_sha256']):
+            or recorded_data.get('train.csv') != recipe['data_sha256']['train.csv']
+            or any(value != recipe['data_sha256'].get(name) for name, value in recorded_data.items())):
         raise ValueError('Expected the canonical competition train.csv and recorded data hashes')
     if metrics['split'] != recipe['split']:
         raise ValueError('Run split metadata differs from the fixed stratified seed-12 split')

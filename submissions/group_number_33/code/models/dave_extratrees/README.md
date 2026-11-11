@@ -1,5 +1,7 @@
 # Dave's retained model: 145 style features + 800 ExtraTrees
 
+For the course submission, start with the [team README](../../../README.md). Its separate `train.py` and `predict.py` entrypoints reuse this exact recipe. The combined runner documented below is retained for historical reproduction; its commands run from `submissions/group_number_33/code/`, not the instructor repository root.
+
 This directory reproduces Dave's selected AI-versus-human text classifier. It converts each passage into **145 handcrafted writing-style and structural features**, then uses an **800-tree ExtraTreesClassifier** to predict the probability of AI authorship.
 
 Dave reported that this version improved the Kaggle public AUROC by **0.004** over his preceding submission. This is a reported change, not an exact public score or a prediction of private-leaderboard performance. The local historical validation AUROC is **0.9956835**.
@@ -160,7 +162,7 @@ Run the focused package tests with:
 python -m unittest models.dave_extratrees.test_model -v
 ```
 
-The package's training entry point and model implementation are [`train.py`](train.py) and [`model.py`](model.py). They reuse the existing feature extractor without changing the team's shared preprocessing or other model implementations. This work belongs to `Dave-new-method-1`; publishing it does not merge it into `main`.
+The package's historical training entry point and model implementation are [`train.py`](train.py) and [`model.py`](model.py). They reuse the existing feature extractor without changing the team's shared preprocessing or other model implementations. The method was originally developed on `Dave-new-method-1` and was later imported into the team's course-submission branch.
 
 ## 8. Reproduce the generalization and error analysis (Q4.1–Q4.4)
 

@@ -1,5 +1,7 @@
 # AML-KaggleCompetion-Group33
 
+This is the imported implementation directory. Start with the [team submission README](../README.md) for the current environment and separate `train.py` / `predict.py` commands. In the historical instructions below, "repository root" means this `code/` directory. Shared preprocessing and archived comparison models require their own additional dependencies; the final-model requirements alone do not install them.
+
 ## Dave's current submitted method
 
 The retained model on `Dave-new-method-1` uses **145 handcrafted text-style features and 800 ExtraTrees decision trees**. Dave reported a **+0.004 Kaggle public AUROC** improvement for this version. Its fixed 8,000/2,000 local benchmark AUROC is **0.9956835**; these are different measurements.
@@ -36,21 +38,21 @@ This writes `data/splits/train_split.csv` and `data/splits/validation_split.csv`
 
 ## CNN
 
-CNN models, training, experiment code, and tests live in [`cnn/`](cnn/README.md).
+CNN models, training, experiment code, and tests live in [`models/cnn/`](models/cnn/README.md).
 Run commands from the repository root:
 
 ```sh
-venv/bin/python -u -m cnn --help
+python -u -m models.cnn --help
 ```
 
-See the [CNN instructions](cnn/README.md) for training, evaluation, pretrained
+See the [CNN instructions](models/cnn/README.md) for training, evaluation, pretrained
 embeddings, and generating submissions from saved checkpoints. Input datasets
 and downloaded embeddings remain in `data/`; CNN-generated results and
-checkpoints are stored in `cnn/outputs/` (ignored by Git).
+checkpoints are stored in `models/cnn/outputs/` (ignored by Git).
 
 After selecting a configuration on the fixed validation split, refit it on all
 10,000 labeled passages and generate test predictions with:
 
 ```sh
-venv/bin/python -u -m cnn train-full --epochs 12
+python -u -m models.cnn train-full --epochs 12
 ```
