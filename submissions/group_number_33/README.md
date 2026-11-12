@@ -68,6 +68,10 @@ Use the original CSV bytes and row order. The frozen [recipe](code/models/dave_e
 
 `unlabeled.csv` and `train_starter_2000.csv` are not used by the selected final model. The optional unlabeled-data experiment below uses `unlabeled.csv` separately. The starter file is a subset, not extra labeled data.
 
+Original competition CSVs and generated MiniLM caches were removed from this submission branch's reachable history on November 11, 2026. Supply the CSVs locally as above. Archived LR/RF experiments regenerate missing MiniLM embeddings using their additional dependencies and pretrained weights; `--skip-minilm` omits those embedding experiments. The final ExtraTrees pipeline does not use these caches.
+
+The cleanup retained all 34 existing commits, their authors, dates, messages, and merge structure; affected commit IDs changed. If you cloned the branch before this cleanup, save any local work and clone it into a fresh directory before continuing. Do not merge the old history back into the cleaned branch.
+
 ## 4. Train and evaluate on the fixed validation split
 
 ```bash
