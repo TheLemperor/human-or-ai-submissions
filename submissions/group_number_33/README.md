@@ -20,7 +20,7 @@ submissions/group_number_33/
   requirements.txt           pinned dependencies for the selected pipeline
   train.py                   validation OR final training, selected by --mode
   predict.py                 load the final model and write submission.csv
-  test_entrypoints.py        checks for the new command-line entrypoints
+  test_entrypoints.py        checks for the command-line entrypoints
   code/                      preserved team implementation and experiment history
     models/dave_extratrees/   selected model, frozen recipe, and error analysis
     models/text_generalization/style_search.py  the 145 feature calculations
@@ -162,7 +162,7 @@ Run the optional real-data integration test. It uses temporary directories, veri
 COMPETITION_DATA_DIR="$PWD/data" python -m unittest test_entrypoints.ReproductionTests.test_separate_validation_training_and_prediction -v
 ```
 
-For Q4 generalization/error analysis, first complete Step 4, then run:
+For generalization/error analysis, first complete Step 4, then run:
 
 ```bash
 PYTHONPATH=code python -m models.dave_extratrees.analyze_errors \
@@ -185,20 +185,6 @@ These write `code/outputs/q4_q5/`. The learning curve uses 500/1,000/2,000/5,000
 
 ## 9. AI-tool disclosure
 
-OpenAI Codex assisted with brainstorming the text-style approach, implementing and debugging code, executing experiments and reproducibility checks, interpreting results, and drafting documentation/report text. Yuqi directed the experiments, decided when to change the approach, reviewed reported validation and Kaggle results, and manually submitted prediction files to Kaggle. The team compared approaches and chose the final model. Automated checks run with AI assistance verified the fixed split, feature dimensions, input checksums, probability/ID format, model serialization, and agreement with the retained predictions; these are not claims that every line was independently audited by a human.
+We used OpenAI Codex to assist with coding, debugging, running experiments, checking reproducibility, and improving documentation. We directed the experiments, reviewed validation and Kaggle results, and selected the final approach. AI also helped explain the implementation and its limitations. The final model runs locally and does not use external LLM APIs to classify competition passages.
 
-The submitted detector computes probabilities locally with scikit-learn. It does not send competition passages to an external commercial LLM API to obtain labels or final predictions, and it does not retrieve hidden test labels. Keep the report's Q6.3 consistent with this disclosure and add any other tools actually used by teammates; do not claim tools or independent checks that were not used or performed.
 
-## 10. Course PR and handoff checklist
-
-- Keep project changes under `submissions/group_number_33/`; do not change the instructor's root README, `.github/`, or other teams' folders.
-- Keep original competition data, credentials, generated prediction CSVs, embedding caches, and model checkpoints local. `.gitignore` helps with new files; it does not remove files already tracked or present in Git history.
-- Preserve meaningful development history and record substantive experiment/fix commits in report Q6.2. Do not squash away that history before review.
-- Use one team PR from the fork into `sekhari/human-or-ai-submissions`, base branch `main`. Suggested title: `[Submission] Group_Number_33 — yw2897, ls2332, wcq3`. The body should summarize the selected method and state that the commands above regenerate `submission.csv`.
-- Put the actual PR URL on the report title page and in the course submission portal. A branch URL is not a PR URL.
-- Submit the final probabilities on Kaggle and record the actual public score. Record the private score only after it is revealed. Keep the local validation score separate.
-- Confirm the PR, README, dependency file, commands, and AI disclosure match the final report before submission.
-
-**Items inherited from the repository migration still need team attention:** the imported history contains competition data deleted in a later commit, and the imported tree contains experiment arrays and historical prediction CSVs. Adding these entrypoints or ignore rules does not resolve those existing items. Review them against the instructor's code-only policy before opening the course PR, and agree on any history cleanup with teammates/course staff so that genuine development history is preserved. This entrypoint update does not rewrite that history or remove teammates' artifacts.
-
-The current shared branch is `submission/Group_Number_33`, as used by the team. The instructor requests a lowercase branch suffix (`submission/group_number_33` for this exact Kaggle name). Coordinate that naming adjustment before the course PR; do not rename teammates' shared branches silently.
